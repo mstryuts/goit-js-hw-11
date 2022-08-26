@@ -14,6 +14,7 @@ const loadMoreBtn = document.querySelector('.load-more')
 
 let page = 1;
 let textInput = '';
+let simpleLightBox;
 
 
 
@@ -39,7 +40,7 @@ function onSubmit(e){
         }
 
         renderGallery(data.hits)
-        // simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+        simpleLightBox = new SimpleLightbox('.gallery a').refresh();
 
     })
 
@@ -48,12 +49,12 @@ function onSubmit(e){
 
 function onLoadMoreClick(e) {
 console.log(e)
-    // simpleLightBox.destroy()
+    simpleLightBox.destroy()
     page += 1;
     fetchImages(textInput, page).then(({ data }) => {
         
         renderGallery(data.hits)
-        // simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+        simpleLightBox = new SimpleLightbox('.gallery a').refresh();
         
         const totalPages = Math.ceil(data.totalHits / 40);
 
