@@ -1,21 +1,27 @@
 import { fetchImages } from './js/fetchImages';
 import { renderGallery } from './js/renderGallery';
-import { ifEmptySearchAlert, ifNoImagesFoundAlert } from './js/alerts';
+import { ifEmptySearchAlert, ifNoImagesFoundAlert,ifEndOfSearchAlert } from './js/alerts';
 
+
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 
 const form = document.getElementById('search-form');
 const input = document.querySelector('input[name="searchQuery"]');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more')
-let page = 1
-let textInput = ''
+
+let page = 1;
+let textInput = '';
+
 
 console.log(form)
 
 
 function onSubmit(e){
     e.preventDefault();
+    window.scrollTo({ top: 0 });
     textInput = input.value.trim();
     gallery.innerHTML = '';
 
@@ -23,25 +29,38 @@ function onSubmit(e){
         ifEmptySearchAlert();
         return;
     }
-
     fetchImages(textInput, page).then(({ data }) => {
-        console.log(data)
         if (data.totalHits === 0) {
             ifNoImagesFoundAlert();
-        } else {
-            renderGallery(data.hits)
-            loadMoreBtn.classList.remove("visualy-hidden");
-
-            
         }
+        renderGallery(data.hits)
+        simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+        loadMoreBtn.classList.remove("is-hidden");
+        
 
     })
     
 }
 
+function onLoadMoreClick(e) {
+    simpleLightBox.destroy()
+    console.log(e)
+    page += 1
+    fetchImages(textInput, page).then(({ data }) => {
+        
+        renderGallery(data.hits)
+        simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+        
+         const totalPages = Math.ceil(data.totalHits / 40);
+
+      if (page > totalPages) {
+        loadMoreBtn.classList.add('is-hidden');
+        ifEndOfSearchAlert();
+      }
+    })
+}
 
 
-
+loadMoreBtn.addEventListener('click', onLoadMoreClick)
 form.addEventListener('submit', onSubmit)
-
 

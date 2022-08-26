@@ -6,6 +6,9 @@ function ifEmptySearchAlert() {
 function ifNoImagesFoundAlert() {
   Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
 }
+function ifEndOfSearchAlert() {
+  Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
+}
 
 
-export {ifEmptySearchAlert, ifNoImagesFoundAlert }
+export {ifEmptySearchAlert, ifNoImagesFoundAlert, ifEndOfSearchAlert }

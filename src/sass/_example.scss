@@ -56,7 +56,6 @@ p {
 .search-form button:hover,
 .search-form button:focus {
   background-color: lightgreen;
-  transition: all 0.5s;
 }
 
 .gallery-container {
@@ -136,13 +135,25 @@ p {
   margin-left: 5px;
 }
 
+
+
+.load-more {
+  display: block;
+  margin: 25px auto 0 auto;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: lightblue;
+  font: inherit;
+  color: white;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
 .is-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-  clip: rect(0 0 0 0);
+  display: none;
+}
+
+.load-more:hover {
+  background-color: lightgreen;
 }
