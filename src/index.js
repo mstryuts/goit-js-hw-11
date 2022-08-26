@@ -39,7 +39,7 @@ function onSubmit(e){
         }
 
         renderGallery(data.hits)
-        simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+        // simpleLightBox = new SimpleLightbox('.gallery a').refresh();
 
     })
 
@@ -48,14 +48,14 @@ function onSubmit(e){
 
 function onLoadMoreClick(e) {
 console.log(e)
-    simpleLightBox.destroy()
-    page += 1
+    // simpleLightBox.destroy()
+    page += 1;
     fetchImages(textInput, page).then(({ data }) => {
         
         renderGallery(data.hits)
-        simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+        // simpleLightBox = new SimpleLightbox('.gallery a').refresh();
         
-         const totalPages = Math.ceil(data.totalHits / 40);
+        const totalPages = Math.ceil(data.totalHits / 40);
 
       if (page > totalPages) {
         loadMoreBtn.classList.add('is-hidden');
