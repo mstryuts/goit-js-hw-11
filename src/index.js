@@ -39,12 +39,11 @@ function onSubmit(e){
         
 
     })
-    
+    e.currentTarget.reset();
 }
 
 function onLoadMoreClick(e) {
     simpleLightBox.destroy()
-    console.log(e)
     page += 1
     fetchImages(textInput, page).then(({ data }) => {
         
