@@ -13,7 +13,7 @@ const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more')
 
 let page = 1;
-// let textInput = '';
+let textInput = '';
 
 
 
@@ -31,6 +31,7 @@ function onSubmit(e){
     fetchImages(textInput, page).then(({ data }) => {
         if (data.totalHits === 0) {
             ifNoImagesFoundAlert();
+            loadMoreBtn.classList.add("is-hidden");
         }
         console.log(data.total)
         if (data.total > 40) {
