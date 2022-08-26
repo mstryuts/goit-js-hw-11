@@ -47,6 +47,7 @@ function onSubmit(e){
 }
 
 function onLoadMoreClick(e) {
+console.log(e)
     simpleLightBox.destroy()
     page += 1
     fetchImages(textInput, page).then(({ data }) => {
