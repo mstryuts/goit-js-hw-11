@@ -13,10 +13,9 @@ const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more')
 
 let page = 1;
-let textInput = '';
+// let textInput = '';
 
 
-console.log(form)
 
 
 function onSubmit(e){
@@ -33,12 +32,16 @@ function onSubmit(e){
         if (data.totalHits === 0) {
             ifNoImagesFoundAlert();
         }
+        console.log(data.total)
+        if (data.total > 40) {
+          loadMoreBtn.classList.remove("is-hidden");
+        }
+
         renderGallery(data.hits)
         simpleLightBox = new SimpleLightbox('.gallery a').refresh();
-        loadMoreBtn.classList.remove("is-hidden");
-        
 
     })
+
     e.currentTarget.reset();
 }
 
