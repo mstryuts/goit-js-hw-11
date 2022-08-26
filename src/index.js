@@ -17,8 +17,6 @@ let textInput = '';
 let simpleLightBox;
 
 
-
-
 function onSubmit(e){
     e.preventDefault();
     window.scrollTo({ top: 0 });
@@ -34,12 +32,12 @@ function onSubmit(e){
             ifNoImagesFoundAlert();
             loadMoreBtn.classList.add("is-hidden");
         }
-        console.log(data.total)
+
         if (data.total > 40) {
           loadMoreBtn.classList.remove("is-hidden");
         }
-
-        renderGallery(data.hits)
+gallery.insertAdjacentHTML('beforeend',renderGallery(data.hits))
+        // renderGallery(data.hits)
         simpleLightBox = new SimpleLightbox('.gallery a').refresh();
 
     })
@@ -47,13 +45,13 @@ function onSubmit(e){
     e.currentTarget.reset();
 }
 
-function onLoadMoreClick(e) {
-console.log(e)
+function onLoadMoreClick() {
     simpleLightBox.destroy()
     page += 1;
     fetchImages(textInput, page).then(({ data }) => {
         
-        renderGallery(data.hits)
+        // renderGallery(data.hits)
+      gallery.insertAdjacentHTML('beforeend',renderGallery(data.hits))
         simpleLightBox = new SimpleLightbox('.gallery a').refresh();
         
         const totalPages = Math.ceil(data.totalHits / 40);
