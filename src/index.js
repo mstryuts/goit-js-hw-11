@@ -6,20 +6,20 @@ import { ifEmptySearchAlert, ifNoImagesFoundAlert,ifEndOfSearchAlert,ifImagesFou
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-
-
 const form = document.getElementById('search-form');
 const input = document.querySelector('input[name="searchQuery"]');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more')
 
-let page = 1;
-let textInput = '';
+let page ; 
+let textInput ;
 let simpleLightBox;
 
 
-function onSubmit(e){
-    e.preventDefault();
+function onSubmit(e) {
+  e.preventDefault();
+  page = 1
+  console.log(page)
     window.scrollTo({ top: 0 });
     textInput = input.value.trim();
   gallery.innerHTML = '';
@@ -50,11 +50,11 @@ function onSubmit(e){
 }
 
 function onLoadMoreClick() {
+  console.log(page)
     simpleLightBox.destroy()
     page += 1;
     fetchImages(textInput, page).then(({ data }) => {
-        
-       
+    
     gallery.insertAdjacentHTML('beforeend',renderGallery(data.hits))
     simpleLightBox = new SimpleLightbox('.gallery a').refresh();
         
@@ -70,3 +70,4 @@ function onLoadMoreClick() {
 
 loadMoreBtn.addEventListener('click', onLoadMoreClick)
 form.addEventListener('submit', onSubmit)
+
