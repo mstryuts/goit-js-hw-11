@@ -9,6 +9,8 @@ function ifNoImagesFoundAlert() {
 function ifEndOfSearchAlert() {
   Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
 }
+function ifImagesFoundAlert(data) {
+  Notiflix.Notify.success(`Hooray! We found ${data.total} images.`);
+}
 
-
-export {ifEmptySearchAlert, ifNoImagesFoundAlert, ifEndOfSearchAlert }
+export { ifEmptySearchAlert, ifNoImagesFoundAlert, ifEndOfSearchAlert, ifImagesFoundAlert };
