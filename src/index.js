@@ -19,9 +19,8 @@ let simpleLightBox;
 function onSubmit(e) {
   e.preventDefault();
   page = 1
-
-    window.scrollTo({ top: 0 });
-    textInput = input.value.trim();
+  window.scrollTo({ top: 0 });
+  textInput = input.value.trim();
   gallery.innerHTML = '';
   loadMoreBtn.classList.add("is-hidden");
 
