@@ -19,7 +19,7 @@ let simpleLightBox;
 function onSubmit(e) {
   e.preventDefault();
   page = 1
-  console.log(page)
+
     window.scrollTo({ top: 0 });
     textInput = input.value.trim();
   gallery.innerHTML = '';
@@ -50,9 +50,9 @@ function onSubmit(e) {
 }
 
 function onLoadMoreClick() {
-  console.log(page)
-    simpleLightBox.destroy()
-    page += 1;
+  simpleLightBox.destroy()
+  page += 1;
+
     fetchImages(textInput, page).then(({ data }) => {
     
     gallery.insertAdjacentHTML('beforeend',renderGallery(data.hits))

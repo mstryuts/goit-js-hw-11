@@ -24,7 +24,7 @@ import axios from "axios";
 
 export async function fetchImages(query, page) {
   try {
-    return await axios.get(`https://pixabay.com/api/?key=29488809-58b059500460d672a67371786&q=${query}&image_type=photo&orientation=horizontal&safesearch=false&page=${page}&per_page=40`);
+    return await axios.get(`https://pixabay.com/api/?key=29488809-58b059500460d672a67371786&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`);
 
   } catch (error) {
     console.error(error);
