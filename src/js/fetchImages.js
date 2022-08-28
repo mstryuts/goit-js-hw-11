@@ -1,4 +1,6 @@
 import axios from "axios";
+import {ifSomeProblemAlert} from './alerts'
+
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '29488809-58b059500460d672a67371786';
@@ -18,7 +20,6 @@ export async function fetchImages(q, page) {
         }
     });
   } catch (error) {
-    console.error(error);
+    ifSomeProblemAlert(error);
   }
 }
-

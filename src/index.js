@@ -1,6 +1,6 @@
 import { fetchImages } from './js/fetchImages';
 import { renderGallery } from './js/renderGallery';
-import { ifEmptySearchAlert, ifNoImagesFoundAlert,ifEndOfSearchAlert,ifImagesFoundAlert } from './js/alerts';
+import { ifEmptySearchAlert, ifNoImagesFoundAlert,ifEndOfSearchAlert,ifImagesFoundAlert,ifDublicateSearch } from './js/alerts';
 
 
 import SimpleLightbox from 'simplelightbox';
@@ -11,8 +11,8 @@ const input = document.querySelector('input[name="searchQuery"]');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more')
 
-let page ; 
-let textInput ;
+let page = 0 ; 
+let textInput = '';
 let simpleLightBox;
 
 
@@ -20,7 +20,12 @@ function onSubmit(e) {
   e.preventDefault();
   page = 1
   window.scrollTo({ top: 0 });
-  textInput = input.value.trim();
+
+  if (textInput && textInput === e.currentTarget.elements[0].value) {
+    ifDublicateSearch()
+    return;
+  }
+  textInput = e.currentTarget.elements[0].value.trim()
   gallery.innerHTML = '';
   loadMoreBtn.classList.add("is-hidden");
 
@@ -42,10 +47,7 @@ function onSubmit(e) {
         loadMoreBtn.classList.remove('is-hidden');
     }
   })
-    .catch(error => console.log(error))
-    .finally(() => {
-      form.reset();
-    });
+    form.reset();
 }
 
 function onLoadMoreClick() {
@@ -64,9 +66,7 @@ function onLoadMoreClick() {
         ifEndOfSearchAlert();
       }
     })
-  .catch(error => console.log(error));
 }
 
 loadMoreBtn.addEventListener('click', onLoadMoreClick)
 form.addEventListener('submit', onSubmit)
-

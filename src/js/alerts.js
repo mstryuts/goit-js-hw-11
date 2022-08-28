@@ -10,7 +10,13 @@ function ifEndOfSearchAlert() {
   Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
 }
 function ifImagesFoundAlert(data) {
-  Notiflix.Notify.success(`Hooray! We found ${data.total} images.`);
+  Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
+}
+function ifSomeProblemAlert(error) {
+  Notiflix.Notify.failure(`${error.message}Something going wrong ¯\_(ツ)_/¯`);
+}
+function ifDublicateSearch() {
+  Notiflix.Notify.warning("You already search it");
 }
 
-export { ifEmptySearchAlert, ifNoImagesFoundAlert, ifEndOfSearchAlert, ifImagesFoundAlert };
+export { ifEmptySearchAlert, ifNoImagesFoundAlert, ifEndOfSearchAlert, ifImagesFoundAlert, ifSomeProblemAlert,ifDublicateSearch};
